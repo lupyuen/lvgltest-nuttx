@@ -1,0 +1,7 @@
+*.a
+*.ddc
+*.o
+.depend
+Make*.dep
+/*.zip
+/lv_demos

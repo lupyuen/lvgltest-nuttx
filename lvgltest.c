@@ -1,5 +1,5 @@
 /****************************************************************************
- * apps/examples/lvgldemo/lvgldemo.c
+ * apps/examples/lvgltest/lvgltest.c
  *
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
@@ -68,11 +68,6 @@
 /****************************************************************************
  * Public Functions Prototypes
  ****************************************************************************/
-
-void lv_demo_benchmark(void);
-void lv_demo_printer(void);
-void lv_demo_stress(void);
-void lv_demo_widgets(void);
 
 /****************************************************************************
  * Private Functions
@@ -168,7 +163,7 @@ static void create_widgets(void)
  ****************************************************************************/
 
 /****************************************************************************
- * Name: main or lvgldemo_main
+ * Name: main or lvgltest_main
  *
  * Description:
  *

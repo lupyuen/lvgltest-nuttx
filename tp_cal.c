@@ -1,5 +1,5 @@
 /****************************************************************************
- * apps/examples/lvgldemo/tp_cal.c
+ * apps/examples/lvgltest/tp_cal.c
  *
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with

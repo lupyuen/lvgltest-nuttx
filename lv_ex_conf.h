@@ -1,5 +1,5 @@
 /****************************************************************************
- * apps/examples/lvgldemo/lv_ex_conf.h
+ * apps/examples/lvgltest/lv_ex_conf.h
  *
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
@@ -40,33 +40,6 @@
  */
 
 #define LV_EX_MOUSEWHEEL   0
-
-/* Show some widget */
-
-#define LV_USE_DEMO_WIDGETS        1
-#if LV_USE_DEMO_WIDGETS
-#ifdef CONFIG_EXAMPLES_LVGLTEST_WIDGETS_SLIDESHOW
-#define LV_DEMO_WIDGETS_SLIDESHOW        CONFIG_EXAMPLES_LVGLTEST_WIDGETS_SLIDESHOW
-#else
-#define LV_DEMO_WIDGETS_SLIDESHOW        0
-#endif
-#endif
-
-/* Printer demo, optimized for 800x480 */
-
-#define LV_USE_DEMO_PRINTER     1
-
-/* Demonstrate the usage of encoder and keyboard */
-
-#define LV_USE_DEMO_KEYPAD_AND_ENCODER     1
-
-/* Benchmark your system */
-
-#define LV_USE_DEMO_BENCHMARK   1
-
-/* Stress test for LVGL */
-
-#define LV_USE_DEMO_STRESS      1
 
 #endif /* __APPS_EXAMPLES_LVGLTEST_LV_EX_CONF_H */
 

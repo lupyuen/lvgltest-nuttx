@@ -27,7 +27,7 @@
 #include <nuttx/compiler.h>
 #include <nuttx/config.h>
 
-#ifdef CONFIG_EXAMPLES_LVGLDEMO_ASYNC_FLUSH
+#ifdef CONFIG_EXAMPLES_LVGLTEST_ASYNC_FLUSH
 #include <pthread.h>
 #include <semaphore.h>
 #endif
@@ -70,7 +70,7 @@ struct fb_state_s
 
 struct fb_state_s state;
 
-#ifdef CONFIG_EXAMPLES_LVGLDEMO_ASYNC_FLUSH
+#ifdef CONFIG_EXAMPLES_LVGLTEST_ASYNC_FLUSH
 static pthread_t fb_write_thread;
 static sem_t flush_sem;
 static sem_t wait_sem;
@@ -97,7 +97,7 @@ static lv_color_t *lv_color_p;
  *
  ****************************************************************************/
 
-#ifdef CONFIG_EXAMPLES_LVGLDEMO_ASYNC_FLUSH
+#ifdef CONFIG_EXAMPLES_LVGLTEST_ASYNC_FLUSH
 
 static void fbdev_wait(lv_disp_drv_t *disp_drv)
 {
@@ -258,7 +258,7 @@ static int fbdev_flush_internal(const lv_area_t *area, lv_color_t *color_p)
  *
  ****************************************************************************/
 
-#ifdef CONFIG_EXAMPLES_LVGLDEMO_ASYNC_FLUSH
+#ifdef CONFIG_EXAMPLES_LVGLTEST_ASYNC_FLUSH
 
 static void fbdev_async_flush(lv_disp_drv_t *disp_drv, const lv_area_t *area,
                               lv_color_t *color_p)
@@ -293,7 +293,7 @@ static void fbdev_async_flush(lv_disp_drv_t *disp_drv, const lv_area_t *area,
  *
  ****************************************************************************/
 
-#ifndef CONFIG_EXAMPLES_LVGLDEMO_ASYNC_FLUSH
+#ifndef CONFIG_EXAMPLES_LVGLTEST_ASYNC_FLUSH
 
 static void fbdev_sync_flush(lv_disp_drv_t *disp_drv, const lv_area_t *area,
                              lv_color_t *color_p)
@@ -321,7 +321,7 @@ static void fbdev_sync_flush(lv_disp_drv_t *disp_drv, const lv_area_t *area,
  *
  ****************************************************************************/
 
-#ifdef CONFIG_EXAMPLES_LVGLDEMO_ASYNC_FLUSH
+#ifdef CONFIG_EXAMPLES_LVGLTEST_ASYNC_FLUSH
 
 static pthread_addr_t fbdev_write(pthread_addr_t arg)
 {
@@ -414,7 +414,7 @@ int fbdev_init(lv_disp_drv_t *lv_drvr)
 
   lv_drvr->hor_res = state.vinfo.xres;
   lv_drvr->ver_res = state.vinfo.yres;
-#ifndef CONFIG_EXAMPLES_LVGLDEMO_ASYNC_FLUSH
+#ifndef CONFIG_EXAMPLES_LVGLTEST_ASYNC_FLUSH
   lv_drvr->flush_cb = fbdev_sync_flush;
 #else
   lv_drvr->flush_cb = fbdev_async_flush;

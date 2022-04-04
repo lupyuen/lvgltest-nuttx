@@ -18,8 +18,8 @@
  *
  ****************************************************************************/
 
-#ifndef __APPS_EXAMPLES_LVGLDEMO_LCDDEV_H
-#define __APPS_EXAMPLES_LVGLDEMO_LCDDEV_H
+#ifndef __APPS_EXAMPLES_LVGLTEST_LCDDEV_H
+#define __APPS_EXAMPLES_LVGLTEST_LCDDEV_H
 
 /****************************************************************************
  * Included Files
@@ -43,4 +43,4 @@ int lcddev_init(lv_disp_drv_t *lv_drvr);
 }
 #endif
 
-#endif /* __APPS_EXAMPLES_LVGLDEMO_LCDDEV_H */
+#endif /* __APPS_EXAMPLES_LVGLTEST_LCDDEV_H */

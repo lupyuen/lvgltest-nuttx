@@ -18,8 +18,8 @@
  *
  ****************************************************************************/
 
-#ifndef __APPS_EXAMPLES_LVGLDEMO_LV_EX_CONF_H
-#define __APPS_EXAMPLES_LVGLDEMO_LV_EX_CONF_H
+#ifndef __APPS_EXAMPLES_LVGLTEST_LV_EX_CONF_H
+#define __APPS_EXAMPLES_LVGLTEST_LV_EX_CONF_H
 
 /****************************************************************************
  * Pre-processor Definitions
@@ -45,8 +45,8 @@
 
 #define LV_USE_DEMO_WIDGETS        1
 #if LV_USE_DEMO_WIDGETS
-#ifdef CONFIG_EXAMPLES_LVGLDEMO_WIDGETS_SLIDESHOW
-#define LV_DEMO_WIDGETS_SLIDESHOW        CONFIG_EXAMPLES_LVGLDEMO_WIDGETS_SLIDESHOW
+#ifdef CONFIG_EXAMPLES_LVGLTEST_WIDGETS_SLIDESHOW
+#define LV_DEMO_WIDGETS_SLIDESHOW        CONFIG_EXAMPLES_LVGLTEST_WIDGETS_SLIDESHOW
 #else
 #define LV_DEMO_WIDGETS_SLIDESHOW        0
 #endif
@@ -68,5 +68,5 @@
 
 #define LV_USE_DEMO_STRESS      1
 
-#endif /* __APPS_EXAMPLES_LVGLDEMO_LV_EX_CONF_H */
+#endif /* __APPS_EXAMPLES_LVGLTEST_LV_EX_CONF_H */
 

@@ -18,8 +18,8 @@
  *
  ****************************************************************************/
 
-#ifndef __APPS_EXAMPLES_LVGLDEMO_TP_H
-#define __APPS_EXAMPLES_LVGLDEMO_TP_H
+#ifndef __APPS_EXAMPLES_LVGLTEST_TP_H
+#define __APPS_EXAMPLES_LVGLTEST_TP_H
 
 /****************************************************************************
  * Included Files
@@ -34,13 +34,13 @@
 
 /* Configuration ************************************************************/
 
-/* CONFIG_EXAMPLES_LVGLDEMO_MINOR - The minor device number.  Minor=N
+/* CONFIG_EXAMPLES_LVGLTEST_MINOR - The minor device number.  Minor=N
  *   corresponds to touchscreen device /dev/input0.  Note this value must
- *   with CONFIG_EXAMPLES_LVGLDEMO_DEVPATH.  Default 0.
- * CONFIG_EXAMPLES_LVGLDEMO_DEVPATH - The path to the touchscreen
- *   device.  This must be consistent with CONFIG_EXAMPLES_LVGLDEMO_MINOR.
+ *   with CONFIG_EXAMPLES_LVGLTEST_DEVPATH.  Default 0.
+ * CONFIG_EXAMPLES_LVGLTEST_DEVPATH - The path to the touchscreen
+ *   device.  This must be consistent with CONFIG_EXAMPLES_LVGLTEST_MINOR.
  *   Default: "/dev/input0"
- * CONFIG_EXAMPLES_LVGLDEMO_MOUSE - The touchscreen test can also be
+ * CONFIG_EXAMPLES_LVGLTEST_MOUSE - The touchscreen test can also be
  *   configured to work with a mouse driver by setting this option.
  */
 
@@ -48,23 +48,23 @@
 #  error "Input device support is not enabled (CONFIG_INPUT_TOUCHSCREEN || CONFIG_INPUT_MOUSE)"
 #endif
 
-#ifndef CONFIG_EXAMPLES_LVGLDEMO_MINOR
-#  undef  CONFIG_EXAMPLES_LVGLDEMO_DEVPATH
-#  define CONFIG_EXAMPLES_LVGLDEMO_MINOR 0
-#  ifdef CONFIG_EXAMPLES_LVGLDEMO_MOUSE
-#    define CONFIG_EXAMPLES_LVGLDEMO_DEVPATH "/dev/mouse0"
+#ifndef CONFIG_EXAMPLES_LVGLTEST_MINOR
+#  undef  CONFIG_EXAMPLES_LVGLTEST_DEVPATH
+#  define CONFIG_EXAMPLES_LVGLTEST_MINOR 0
+#  ifdef CONFIG_EXAMPLES_LVGLTEST_MOUSE
+#    define CONFIG_EXAMPLES_LVGLTEST_DEVPATH "/dev/mouse0"
 #  else
-#    define CONFIG_EXAMPLES_LVGLDEMO_DEVPATH "/dev/input0"
+#    define CONFIG_EXAMPLES_LVGLTEST_DEVPATH "/dev/input0"
 #  endif
 #endif
 
-#ifndef CONFIG_EXAMPLES_LVGLDEMO_DEVPATH
-#  undef  CONFIG_EXAMPLES_LVGLDEMO_MINOR
-#  define CONFIG_EXAMPLES_LVGLDEMO_MINOR 0
-#  ifdef CONFIG_EXAMPLES_LVGLDEMO_MOUSE
-#    define CONFIG_EXAMPLES_LVGLDEMO_DEVPATH "/dev/mouse0"
+#ifndef CONFIG_EXAMPLES_LVGLTEST_DEVPATH
+#  undef  CONFIG_EXAMPLES_LVGLTEST_MINOR
+#  define CONFIG_EXAMPLES_LVGLTEST_MINOR 0
+#  ifdef CONFIG_EXAMPLES_LVGLTEST_MOUSE
+#    define CONFIG_EXAMPLES_LVGLTEST_DEVPATH "/dev/mouse0"
 #  else
-#    define CONFIG_EXAMPLES_LVGLDEMO_DEVPATH "/dev/input0"
+#    define CONFIG_EXAMPLES_LVGLTEST_DEVPATH "/dev/input0"
 #  endif
 #endif
 
@@ -126,4 +126,4 @@ bool tp_read(FAR struct _lv_indev_drv_t *indev_drv,
 void tp_set_cal_values(FAR lv_point_t *ul, FAR lv_point_t *ur,
                        FAR lv_point_t *lr, FAR lv_point_t *ll);
 
-#endif /* __APPS_EXAMPLES_LVGLDEMO_TP_H */
+#endif /* __APPS_EXAMPLES_LVGLTEST_TP_H */

@@ -3,32 +3,32 @@
 # see the file kconfig-language.txt in the NuttX tools repository.
 #
 
-menuconfig EXAMPLES_LVGLDEMO
-	tristate "LVGL Demo"
+menuconfig EXAMPLES_LVGLTEST
+	tristate "LVGL Test App"
 	default n
 	depends on GRAPHICS_LVGL
 	---help---
-		Enable build the Light and Versatile Graphics Library Demo programs
+		Enable LVGL Test App
 
-if EXAMPLES_LVGLDEMO
+if EXAMPLES_LVGLTEST
 
-config EXAMPLES_LVGLDEMO_BUFF_SIZE
+config EXAMPLES_LVGLTEST_BUFF_SIZE
 	int "Display buffer size (in line)"
 	default 20
 
-config EXAMPLES_LVGLDEMO_DOUBLE_BUFFERING
+config EXAMPLES_LVGLTEST_DOUBLE_BUFFERING
 	bool "Enable double buffering"
 	default n
 	---help---
 		When double buffering is enabled, LVGL expects the size of both
 		buffers as:
-		CONFIG_LV_HOR_RES * CONFIG_EXAMPLES_LVGLDEMO_BUFF_SIZE.
+		CONFIG_LV_HOR_RES * CONFIG_EXAMPLES_LVGLTEST_BUFF_SIZE.
 		True double buffering support is enabled if both buffers have the
 		same dimensions as the display device resolution. Otherwise,
 		LVGL will perform a number of partial refreshes according to the
 		defined buffer size.
 
-config EXAMPLES_LVGLDEMO_ASYNC_FLUSH
+config EXAMPLES_LVGLTEST_ASYNC_FLUSH
 	bool "Flush the display buffer asynchronously"
 	default n
 	---help---
@@ -37,47 +37,47 @@ config EXAMPLES_LVGLDEMO_ASYNC_FLUSH
 
 choice
 	prompt "Select a demo application"
-	default EXAMPLES_LVGLDEMO_WIDGETS
+	default EXAMPLES_LVGLTEST_WIDGETS
 
-config EXAMPLES_LVGLDEMO_BENCHMARK
+config EXAMPLES_LVGLTEST_BENCHMARK
 	bool "Benchmark"
 
-config EXAMPLES_LVGLDEMO_PRINTER
+config EXAMPLES_LVGLTEST_PRINTER
 	bool "Printer"
 	---help---
 		This demo is optimized for 800 * 480 resolution
 
-config EXAMPLES_LVGLDEMO_STRESS
+config EXAMPLES_LVGLTEST_STRESS
 	bool "Stress"
 
-config EXAMPLES_LVGLDEMO_WIDGETS
+config EXAMPLES_LVGLTEST_WIDGETS
 	bool "Widgets"
 
 endchoice
 
-if EXAMPLES_LVGLDEMO_WIDGETS
+if EXAMPLES_LVGLTEST_WIDGETS
 
-config EXAMPLES_LVGLDEMO_WIDGETS_SLIDESHOW
+config EXAMPLES_LVGLTEST_WIDGETS_SLIDESHOW
 	bool "Enable Slideshow mode for Widgets example"
 	default n
 	---help---
 		Slideshow mode consists of a non-interactive demonstration of the
 		Widgets example.
 
-endif # EXAMPLES_LVGLDEMO_WIDGETS
+endif # EXAMPLES_LVGLTEST_WIDGETS
 
-config EXAMPLES_LVGLDEMO_PRIORITY
-	int "lvgl task priority"
+config EXAMPLES_LVGLTEST_PRIORITY
+	int "LVGL Test task priority"
 	default 100
 
-config EXAMPLES_LVGLDEMO_STACKSIZE
-	int "lvgldemo stack size"
+config EXAMPLES_LVGLTEST_STACKSIZE
+	int "LVGL Test stack size"
 	default 16384
 
 comment "Input configuration options"
 	depends on INPUT_TOUCHSCREEN || INPUT_MOUSE
 
-config EXAMPLES_LVGLDEMO_CALIBRATE
+config EXAMPLES_LVGLTEST_CALIBRATE
 	bool "Calibrate touchscreen"
 	default y
 	depends on INPUT_TOUCHSCREEN || INPUT_MOUSE
@@ -87,24 +87,24 @@ config EXAMPLES_LVGLDEMO_CALIBRATE
 
 if INPUT_TOUCHSCREEN
 
-config EXAMPLES_LVGLDEMO_MINOR
+config EXAMPLES_LVGLTEST_MINOR
 	int "Touchscreen minor device number"
 	default 0
 	---help---
 		The minor device number.  Minor=N corresponds to touchscreen device
-		/dev/inputN.  Note this value must with EXAMPLES_LVGLDEMO_DEVPATH.
+		/dev/inputN.  Note this value must with EXAMPLES_LVGLTEST_DEVPATH.
 		Default 0.
 
-config EXAMPLES_LVGLDEMO_DEVPATH
+config EXAMPLES_LVGLTEST_DEVPATH
 	string "Touchscreen device path"
 	default "/dev/input0"
 	---help---
 		The path to the touchscreen device.  This must be consistent with
-		EXAMPLES_LVGLDEMO_MINOR. Default: "/dev/input0"
+		EXAMPLES_LVGLTEST_MINOR. Default: "/dev/input0"
 
 endif # INPUT_TOUCHSCREEN
 
-config EXAMPLES_LVGLDEMO_MOUSE
+config EXAMPLES_LVGLTEST_MOUSE
 	bool "Mouse interface"
 	default n
 	depends on INPUT_MOUSE
@@ -112,4 +112,4 @@ config EXAMPLES_LVGLDEMO_MOUSE
 		The LittleVGL demo can also be configured to work with a mouse
 		driver by setting this option.
 
-endif # EXAMPLES_LVGLDEMO
+endif # EXAMPLES_LVGLTEST

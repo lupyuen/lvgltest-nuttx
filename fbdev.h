@@ -18,8 +18,8 @@
  *
  ****************************************************************************/
 
-#ifndef __APPS_EXAMPLES_LVGLDEMO_FBDEV_H
-#define __APPS_EXAMPLES_LVGLDEMO_FBDEV_H
+#ifndef __APPS_EXAMPLES_LVGLTEST_FBDEV_H
+#define __APPS_EXAMPLES_LVGLTEST_FBDEV_H
 
 /****************************************************************************
  * Included Files
@@ -43,4 +43,4 @@ int fbdev_init(lv_disp_drv_t *lv_drvr);
 }
 #endif
 
-#endif /* __APPS_EXAMPLES_LVGLDEMO_FBDEV_H */
+#endif /* __APPS_EXAMPLES_LVGLTEST_FBDEV_H */

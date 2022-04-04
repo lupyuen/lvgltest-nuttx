@@ -28,7 +28,7 @@
 #include <nuttx/config.h>
 #include <nuttx/lcd/lcd_dev.h>
 
-#ifdef CONFIG_EXAMPLES_LVGLDEMO_ASYNC_FLUSH
+#ifdef CONFIG_EXAMPLES_LVGLTEST_ASYNC_FLUSH
 #include <pthread.h>
 #include <semaphore.h>
 #endif
@@ -68,7 +68,7 @@ struct lcd_state_s
 
 static struct lcd_state_s state;
 
-#ifdef CONFIG_EXAMPLES_LVGLDEMO_ASYNC_FLUSH
+#ifdef CONFIG_EXAMPLES_LVGLTEST_ASYNC_FLUSH
 static pthread_t lcd_write_thread;
 static sem_t flush_sem;
 static sem_t wait_sem;
@@ -93,7 +93,7 @@ static struct lcddev_area_s lcd_area;
  *
  ****************************************************************************/
 
-#ifdef CONFIG_EXAMPLES_LVGLDEMO_ASYNC_FLUSH
+#ifdef CONFIG_EXAMPLES_LVGLTEST_ASYNC_FLUSH
 
 static void lcddev_wait(lv_disp_drv_t *disp_drv)
 {
@@ -122,7 +122,7 @@ static void lcddev_wait(lv_disp_drv_t *disp_drv)
  *
  ****************************************************************************/
 
-#ifdef CONFIG_EXAMPLES_LVGLDEMO_ASYNC_FLUSH
+#ifdef CONFIG_EXAMPLES_LVGLTEST_ASYNC_FLUSH
 
 static void lcddev_async_flush(lv_disp_drv_t *disp_drv,
                                const lv_area_t *area,
@@ -188,7 +188,7 @@ static void lcddev_sync_flush(lv_disp_drv_t *disp_drv, const lv_area_t *area,
  *
  ****************************************************************************/
 
-#ifdef CONFIG_EXAMPLES_LVGLDEMO_ASYNC_FLUSH
+#ifdef CONFIG_EXAMPLES_LVGLTEST_ASYNC_FLUSH
 
 static pthread_addr_t lcddev_write(pthread_addr_t addr)
 {
@@ -295,7 +295,7 @@ int lcddev_init(lv_disp_drv_t *lv_drvr)
 
   lv_drvr->hor_res = state.vinfo.xres;
   lv_drvr->ver_res = state.vinfo.yres;
-#ifndef CONFIG_EXAMPLES_LVGLDEMO_ASYNC_FLUSH
+#ifndef CONFIG_EXAMPLES_LVGLTEST_ASYNC_FLUSH
   lv_drvr->flush_cb = lcddev_sync_flush;
 #else
   lv_drvr->flush_cb = lcddev_async_flush;

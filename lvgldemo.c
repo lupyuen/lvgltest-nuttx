@@ -63,7 +63,7 @@
 #endif
 
 #define DISPLAY_BUFFER_SIZE (CONFIG_LV_HOR_RES * \
-                              CONFIG_EXAMPLES_LVGLDEMO_BUFF_SIZE)
+                              CONFIG_EXAMPLES_LVGLTEST_BUFF_SIZE)
 
 /****************************************************************************
  * Public Functions Prototypes
@@ -97,7 +97,7 @@ static void monitor_cb(lv_disp_drv_t * disp_drv, uint32_t time, uint32_t px)
 
 static lv_color_t buffer1[DISPLAY_BUFFER_SIZE];
 
-#ifdef CONFIG_EXAMPLES_LVGLDEMO_DOUBLE_BUFFERING
+#ifdef CONFIG_EXAMPLES_LVGLTEST_DOUBLE_BUFFERING
 static lv_color_t buffer2[DISPLAY_BUFFER_SIZE];
 #else
 # define buffer2 NULL
@@ -126,7 +126,7 @@ int main(int argc, FAR char *argv[])
   lv_disp_buf_t disp_buf;
 
 #if defined(CONFIG_INPUT_TOUCHSCREEN) || defined(CONFIG_INPUT_MOUSE)
-#ifndef CONFIG_EXAMPLES_LVGLDEMO_CALIBRATE
+#ifndef CONFIG_EXAMPLES_LVGLTEST_CALIBRATE
   lv_point_t p[4];
 
   /* top left */
@@ -206,20 +206,20 @@ int main(int argc, FAR char *argv[])
   lv_indev_drv_register(&indev_drv);
 #endif
 
-#if defined(CONFIG_EXAMPLES_LVGLDEMO_BENCHMARK)
+#if defined(CONFIG_EXAMPLES_LVGLTEST_BENCHMARK)
   lv_demo_benchmark();
-#elif defined(CONFIG_EXAMPLES_LVGLDEMO_PRINTER)
+#elif defined(CONFIG_EXAMPLES_LVGLTEST_PRINTER)
   lv_demo_printer();
-#elif defined(CONFIG_EXAMPLES_LVGLDEMO_STRESS)
+#elif defined(CONFIG_EXAMPLES_LVGLTEST_STRESS)
   lv_demo_stress();
-#elif defined(CONFIG_EXAMPLES_LVGLDEMO_WIDGETS)
+#elif defined(CONFIG_EXAMPLES_LVGLTEST_WIDGETS)
   lv_demo_widgets();
 #endif
 
 #if defined(CONFIG_INPUT_TOUCHSCREEN) || defined(CONFIG_INPUT_MOUSE)
   /* Start TP calibration */
 
-#ifdef CONFIG_EXAMPLES_LVGLDEMO_CALIBRATE
+#ifdef CONFIG_EXAMPLES_LVGLTEST_CALIBRATE
   tp_cal_create();
 #else
   tp_set_cal_values(p, p + 1, p + 2, p + 3);
@@ -236,3 +236,4 @@ int main(int argc, FAR char *argv[])
 
   return EXIT_SUCCESS;
 }
+#error aaaa

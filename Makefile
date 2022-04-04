@@ -31,9 +31,9 @@ LVGL_EXAMPLES_UNPACKNAME = lv_demos
 UNPACK ?= unzip -o
 
 PROGNAME = lvgldemo
-PRIORITY = $(CONFIG_EXAMPLES_LVGLDEMO_PRIORITY)
-STACKSIZE = $(CONFIG_EXAMPLES_LVGLDEMO_STACKSIZE)
-MODULE = $(CONFIG_EXAMPLES_LVGLDEMO)
+PRIORITY = $(CONFIG_EXAMPLES_LVGLTEST_PRIORITY)
+STACKSIZE = $(CONFIG_EXAMPLES_LVGLTEST_STACKSIZE)
+MODULE = $(CONFIG_EXAMPLES_LVGLTEST)
 
 # LittleVGL demo Example
 
@@ -49,12 +49,12 @@ LV_EXAMPLE_ASSETS = $(wildcard ./lv_demos/assets/*.c)
 CSRCS += $(notdir $(LV_EXAMPLE_ASSETS))
 VPATH += lv_demos/assets
 
-ifneq ($(CONFIG_EXAMPLES_LVGLDEMO_BENCHMARK),)
+ifneq ($(CONFIG_EXAMPLES_LVGLTEST_BENCHMARK),)
 CSRCS += lv_demo_benchmark.c
 VPATH += lv_demos/src/lv_demo_benchmark
 endif
 
-ifneq ($(CONFIG_EXAMPLES_LVGLDEMO_PRINTER),)
+ifneq ($(CONFIG_EXAMPLES_LVGLTEST_PRINTER),)
 LV_PRINTER_IMAGES = $(wildcard ./lv_demos/src/lv_demo_printer/images/*.c)
 CSRCS += lv_demo_printer.c lv_demo_printer_theme.c
 CSRCS += $(notdir $(LV_PRINTER_IMAGES))
@@ -62,12 +62,12 @@ VPATH += lv_demos/src/lv_demo_printer
 VPATH += lv_demos/src/lv_demo_printer/images
 endif
 
-ifneq ($(CONFIG_EXAMPLES_LVGLDEMO_STRESS),)
+ifneq ($(CONFIG_EXAMPLES_LVGLTEST_STRESS),)
 CSRCS += lv_demo_stress.c
 VPATH += lv_demos/src/lv_demo_stress
 endif
 
-ifneq ($(CONFIG_EXAMPLES_LVGLDEMO_WIDGETS),)
+ifneq ($(CONFIG_EXAMPLES_LVGLTEST_WIDGETS),)
 CSRCS += lv_demo_widgets.c
 VPATH += lv_demos/src/lv_demo_widgets
 endif

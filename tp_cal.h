@@ -18,8 +18,8 @@
  *
  ****************************************************************************/
 
-#ifndef __APPS_EXAMPLES_LVGLDEMO_TP_CAL_H
-#define __APPS_EXAMPLES_LVGLDEMO_TP_CAL_H
+#ifndef __APPS_EXAMPLES_LVGLTEST_TP_CAL_H
+#define __APPS_EXAMPLES_LVGLTEST_TP_CAL_H
 
 /****************************************************************************
  * Public Function Prototypes
@@ -50,4 +50,4 @@ void tp_cal_create(void);
 }
 #endif
 
-#endif /* __APPS_EXAMPLES_LVGLDEMO_TP_CAL_H */
+#endif /* __APPS_EXAMPLES_LVGLTEST_TP_CAL_H */

@@ -40,3 +40,9 @@ make menuconfig
 ```
 
 In menuconfig, enable the LVGL Test App under "Application Configuration" → "Examples".
+
+To run the app, enter this in the NuttX Shell...
+
+```bash
+lvgltest
+```

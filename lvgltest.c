@@ -104,6 +104,36 @@ static lv_color_t buffer2[DISPLAY_BUFFER_SIZE];
 #endif
 
 /****************************************************************************
+ * Private Functions
+ ****************************************************************************/
+
+/****************************************************************************
+ * Name: create_widgets
+ *
+ * Description:
+ *   Create the LVGL Widgets that will be rendered on the display.
+ *
+ ****************************************************************************/
+
+static void create_widgets(void)
+{
+  //  Get the Active Screen
+  lv_obj_t *screen = lv_scr_act();
+
+  //  Create a Message Box Widget
+  lv_obj_t *msgbox = lv_msgbox_create(screen, NULL);
+
+  //  Set the Message Box Text
+  lv_msgbox_set_text(msgbox, "Hello PineDio Stack!");
+
+  //  Define the Message Box Buttons
+  static const char *btns[] = {"Cancel", "OK", ""};
+
+  //  Add the buttons to the Message Box
+  lv_msgbox_add_btns(msgbox, btns);
+}
+
+/****************************************************************************
  * Public Functions
  ****************************************************************************/
 
@@ -176,11 +206,11 @@ int main(int argc, FAR char *argv[])
 
   /* Display interface initialization */
 
-  if (fbdev_init(&disp_drv) != EXIT_SUCCESS)
+  if (lcddev_init(&disp_drv) != EXIT_SUCCESS)
     {
-      /* Failed to use framebuffer falling back to lcd driver */
+      /* Failed to use lcd driver falling back to framebuffer */
 
-      if (lcddev_init(&disp_drv) != EXIT_SUCCESS)
+      if (fbdev_init(&disp_drv) != EXIT_SUCCESS)
         {
           /* No possible drivers left, fail */
 
@@ -206,15 +236,9 @@ int main(int argc, FAR char *argv[])
   lv_indev_drv_register(&indev_drv);
 #endif
 
-#if defined(CONFIG_EXAMPLES_LVGLTEST_BENCHMARK)
-  lv_demo_benchmark();
-#elif defined(CONFIG_EXAMPLES_LVGLTEST_PRINTER)
-  lv_demo_printer();
-#elif defined(CONFIG_EXAMPLES_LVGLTEST_STRESS)
-  lv_demo_stress();
-#elif defined(CONFIG_EXAMPLES_LVGLTEST_WIDGETS)
-  lv_demo_widgets();
-#endif
+  /* Create the widgets for display */
+
+  create_widgets();
 
 #if defined(CONFIG_INPUT_TOUCHSCREEN) || defined(CONFIG_INPUT_MOUSE)
   /* Start TP calibration */

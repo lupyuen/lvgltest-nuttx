@@ -65,6 +65,11 @@
 #define DISPLAY_BUFFER_SIZE (CONFIG_LV_HOR_RES * \
                               CONFIG_EXAMPLES_LVGLTEST_BUFF_SIZE)
 
+/* LVGL Canvas Size */
+
+#define CANVAS_WIDTH   100
+#define CANVAS_HEIGHT  100
+
 /****************************************************************************
  * Public Functions Prototypes
  ****************************************************************************/
@@ -108,6 +113,7 @@ static lv_color_t buffer2[DISPLAY_BUFFER_SIZE];
  * Description:
  *   Create the LVGL Widgets that will be rendered on the display. Based on
  *   https://docs.lvgl.io/7.11/widgets/label.html#label-recoloring-and-scrolling
+ *   https://docs.lvgl.io/7.11/widgets/canvas.html#drawing-on-the-canvas-and-rotate
  *   https://docs.lvgl.io/7.11/widgets/msgbox.html#simple-message-box
  *
  ****************************************************************************/
@@ -133,7 +139,7 @@ static void create_widgets(void)
   lv_label_set_text(
     label, 
     "#ff0000 HELLO# "    //  Red Text
-    "#00ff00 PINEDIO# "  //  Green Text
+    "#00aa00 PINEDIO# "  //  Green Text
     "#0000ff STACK!# "   //  Blue Text
   );
 
@@ -143,7 +149,36 @@ static void create_widgets(void)
   //  Align the label to the center of the screen, shift 30 pixels up
   lv_obj_align(label, NULL, LV_ALIGN_CENTER, 0, -30);
 
-#ifdef CONFIG_EXAMPLES_LVGLTEST_MESSAGEBOX
+#ifdef CONFIG_USE_LV_CANVAS  //  LVGL Canvas Demo
+  lv_draw_rect_dsc_t rect_dsc;
+  lv_draw_rect_dsc_init(&rect_dsc);
+  rect_dsc.radius = 10;
+  rect_dsc.bg_opa = LV_OPA_COVER;
+  rect_dsc.bg_grad_dir = LV_GRAD_DIR_HOR;
+  rect_dsc.bg_color = LV_COLOR_BLUE;
+  rect_dsc.bg_grad_color = LV_COLOR_GREEN;
+  rect_dsc.border_width = 2;
+  rect_dsc.border_opa = LV_OPA_90;
+  rect_dsc.border_color = LV_COLOR_SILVER;
+  rect_dsc.shadow_width = 5;
+  rect_dsc.shadow_ofs_x = 5;
+  rect_dsc.shadow_ofs_y = 5;
+
+  lv_draw_label_dsc_t label_dsc;
+  lv_draw_label_dsc_init(&label_dsc);
+  label_dsc.color = LV_COLOR_YELLOW;
+
+  static lv_color_t cbuf[LV_CANVAS_BUF_SIZE_TRUE_COLOR(CANVAS_WIDTH, CANVAS_HEIGHT)];
+
+  lv_obj_t * canvas = lv_canvas_create(lv_scr_act(), NULL);
+  lv_canvas_set_buffer(canvas, cbuf, CANVAS_WIDTH, CANVAS_HEIGHT, LV_IMG_CF_TRUE_COLOR);
+  lv_obj_align(canvas, NULL, LV_ALIGN_CENTER, 0, 50);
+  lv_canvas_fill_bg(canvas, LV_COLOR_WHITE, LV_OPA_TRANSP);
+
+  lv_canvas_draw_rect(canvas, 0, 0, 95, 95, &rect_dsc);
+#endif  //  CONFIG_USE_LV_CANVAS
+
+#ifdef CONFIG_EXAMPLES_LVGLTEST_MESSAGEBOX  //  LVGL Message Box Demo
   //  Create a Message Box Widget
   lv_obj_t *msgbox = lv_msgbox_create(screen, NULL);
 

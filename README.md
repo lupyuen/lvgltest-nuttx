@@ -9,7 +9,7 @@ To add this repo to your NuttX project...
 ```bash
 ## TODO: Change this to the path of our "incubator-nuttx-apps/examples" folder
 pushd nuttx/apps/examples
-git submodule add https://github.com/lupyuen/lvgl-test-nuttx lvgl_test
+git submodule add https://github.com/lupyuen/lvgltest-nuttx lvgltest
 popd
 ```
 

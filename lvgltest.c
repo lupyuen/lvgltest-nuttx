@@ -111,7 +111,9 @@ static lv_color_t buffer2[DISPLAY_BUFFER_SIZE];
  * Name: create_widgets
  *
  * Description:
- *   Create the LVGL Widgets that will be rendered on the display.
+ *   Create the LVGL Widgets that will be rendered on the display. Based on
+ *   https://docs.lvgl.io/7.11/widgets/label.html#label-recoloring-and-scrolling
+ *   https://docs.lvgl.io/7.11/widgets/msgbox.html#simple-message-box
  *
  ****************************************************************************/
 
@@ -120,6 +122,33 @@ static void create_widgets(void)
   //  Get the Active Screen
   lv_obj_t *screen = lv_scr_act();
 
+  //  Create a Label Widget
+  lv_obj_t *label = lv_label_create(screen, NULL);
+
+  //  Wrap long lines in the label text
+  lv_label_set_long_mode(label, LV_LABEL_LONG_BREAK);
+
+  //  Interpret color codes in the label text
+  lv_label_set_recolor(label, true);
+
+  //  Center align the label text
+  lv_label_set_align(label, LV_LABEL_ALIGN_CENTER);
+
+  //  Set the label text and colors
+  lv_label_set_text(
+    label, 
+    "#ff0000 HELLO# "    //  Red Text
+    "#00ff00 PINEDIO# "  //  Green Text
+    "#0000ff STACK!# "   //  Blue Text
+  );
+
+  //  Set the label width
+  lv_obj_set_width(label, 200);
+
+  //  Align the label to the center of the screen, shift 30 pixels up
+  lv_obj_align(label, NULL, LV_ALIGN_CENTER, 0, -30);
+
+#ifdef CONFIG_EXAMPLES_LVGLTEST_MESSAGEBOX
   //  Create a Message Box Widget
   lv_obj_t *msgbox = lv_msgbox_create(screen, NULL);
 
@@ -131,6 +160,7 @@ static void create_widgets(void)
 
   //  Add the buttons to the Message Box
   lv_msgbox_add_btns(msgbox, btns);
+#endif  //  CONFIG_EXAMPLES_LVGLTEST_MESSAGEBOX
 }
 
 /****************************************************************************

@@ -1,5 +1,5 @@
 ############################################################################
-# apps/examples/lvgldemo/Makefile
+# apps/examples/lvgltest/Makefile
 #
 # Licensed to the Apache Software Foundation (ASF) under one or more
 # contributor license agreements.  See the NOTICE file distributed with
@@ -30,7 +30,7 @@ LVGL_EXAMPLES_TARBALL = v$(LVGL_EXAMPLES_VERSION).zip
 LVGL_EXAMPLES_UNPACKNAME = lv_demos
 UNPACK ?= unzip -o
 
-PROGNAME = lvgldemo
+PROGNAME = lvgltest
 PRIORITY = $(CONFIG_EXAMPLES_LVGLTEST_PRIORITY)
 STACKSIZE = $(CONFIG_EXAMPLES_LVGLTEST_STACKSIZE)
 MODULE = $(CONFIG_EXAMPLES_LVGLTEST)
@@ -72,7 +72,7 @@ CSRCS += lv_demo_widgets.c
 VPATH += lv_demos/src/lv_demo_widgets
 endif
 
-MAINSRC = lvgldemo.c
+MAINSRC = lvgltest.c
 
 CFLAGS += ${shell $(DEFINE) "$(CC)" LV_LVGL_H_INCLUDE_SIMPLE} -Wno-format
 CXXFLAGS += ${shell $(DEFINE) "$(CC)" LV_LVGL_H_INCLUDE_SIMPLE} -Wno-format

@@ -1,6 +1,6 @@
 # LVGL Test App for Apache NuttX RTOS
 
-See https://github.com/lupyuen/pinedio-stack-nuttx
+See [lupyuen/pinedio-stack-nuttx](https://github.com/lupyuen/pinedio-stack-nuttx)
 
 # Install App
 
@@ -24,6 +24,9 @@ cp .config ../config
 
 ## Erase the Build Config and Kconfig files
 make distclean
+
+## For PineDio Stack BL604: Configure the build for PineDio Stack BL604
+./tools/configure.sh bl602evb:pinedio
 
 ## For BL602 / BL604: Configure the build for BL602 / BL604
 ./tools/configure.sh bl602evb:nsh

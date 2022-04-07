@@ -67,8 +67,8 @@
 
 /* LVGL Canvas Size */
 
-#define CANVAS_WIDTH   100
-#define CANVAS_HEIGHT  100
+#define CANVAS_WIDTH   50
+#define CANVAS_HEIGHT  50
 
 /****************************************************************************
  * Public Functions Prototypes
@@ -179,7 +179,7 @@ static void create_widgets(void)
   rect_dsc.shadow_ofs_y  = 5;  //  Shadow Offset Y
 
   //  Draw the Rounded Rectangle to the canvas
-  lv_canvas_draw_rect(canvas, 0, 0, 95, 95, &rect_dsc);
+  lv_canvas_draw_rect(canvas, 0, 0, 45, 45, &rect_dsc);
 #endif  //  CONFIG_USE_LV_CANVAS
 
 #ifdef CONFIG_EXAMPLES_LVGLTEST_MESSAGEBOX  //  LVGL Message Box Demo

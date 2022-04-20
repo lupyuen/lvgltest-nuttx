@@ -1,6 +1,16 @@
+![LVGL Test App on Pine64 PineDio Stack BL604 RISC-V Board](https://lupyuen.github.io/images/pinedio2-title.jpg)
+
 # LVGL Test App for Apache NuttX RTOS
 
-See [lupyuen/pinedio-stack-nuttx](https://github.com/lupyuen/pinedio-stack-nuttx)
+Read the articles...
+
+-   ["PineDio Stack BL604 runs Apache NuttX RTOS"](https://lupyuen.github.io/articles/pinedio2)
+
+-   ["NuttX Touch Panel Driver for PineDio Stack BL604"](https://lupyuen.github.io/articles/touch)
+
+This NuttX App is a simplified version of the LVGL Demo App for NuttX...
+
+-   [incubator-nuttx-apps/examples/lvgldemo](https://github.com/lupyuen/incubator-nuttx-apps/tree/pinedio/examples/lvgldemo)
 
 # Install App
 

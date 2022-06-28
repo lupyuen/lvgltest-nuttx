@@ -22,6 +22,12 @@
  * Included Files
  ****************************************************************************/
 
+#if defined(__NuttX__) && defined(__clang__)  //  Workaround for NuttX with zig cc
+#include <arch/types.h>
+#include "../../nuttx/include/limits.h"
+#define FAR
+#endif  //  defined(__NuttX__) && defined(__clang__)
+
 #include <nuttx/config.h>
 
 #include <sys/boardctl.h>
@@ -88,7 +94,9 @@
 
 static void monitor_cb(lv_disp_drv_t * disp_drv, uint32_t time, uint32_t px)
 {
+#ifndef __clang__  //  Doesn't compile with zig cc
   ginfo("%" PRIu32 " px refreshed in %" PRIu32 " ms\n", px, time);
+#endif  //  __clang__
 }
 
 /****************************************************************************

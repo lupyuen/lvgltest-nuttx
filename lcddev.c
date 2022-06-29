@@ -313,3 +313,33 @@ int lcddev_init(lv_disp_drv_t *lv_drvr)
 
   return EXIT_SUCCESS;
 }
+
+/****************************************************************************
+ * Name: get_disp_drv
+ *
+ * Description:
+ *   Return the static instance of Display Driver, because Zig can't
+ *   allocate structs wth bitfields inside.
+ *
+ ****************************************************************************/
+
+lv_disp_drv_t *get_disp_drv(void)
+{
+  static lv_disp_drv_t disp_drv;
+  return &disp_drv;
+}
+
+/****************************************************************************
+ * Name: get_disp_buf
+ *
+ * Description:
+ *   Return the static instance of Display Buffer, because Zig can't
+ *   allocate structs wth bitfields inside.
+ *
+ ****************************************************************************/
+
+lv_disp_buf_t *get_disp_buf(void)
+{
+  static lv_disp_buf_t disp_buf;
+  return &disp_buf;
+}

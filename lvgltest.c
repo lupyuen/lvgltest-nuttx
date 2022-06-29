@@ -157,7 +157,7 @@ static void create_widgets(void)
   //  Align the label to the center of the screen, shift 30 pixels up
   lv_obj_align(label, NULL, LV_ALIGN_CENTER, 0, -30);
 
-#ifdef CONFIG_USE_LV_CANVAS  //  LVGL Canvas Demo
+#if defined(CONFIG_USE_LV_CANVAS) && !defined(__clang__)  //  LVGL Canvas Demo doesn't work with zig cc because of `lv_color_t`
   //  Create the Canvas
   lv_obj_t *canvas = lv_canvas_create(screen, NULL);
 
@@ -188,7 +188,7 @@ static void create_widgets(void)
 
   //  Draw the Rounded Rectangle to the canvas
   lv_canvas_draw_rect(canvas, 0, 0, 45, 45, &rect_dsc);
-#endif  //  CONFIG_USE_LV_CANVAS
+#endif  //  defined(CONFIG_USE_LV_CANVAS) && !defined(__clang__)
 
 #ifdef CONFIG_EXAMPLES_LVGLTEST_MESSAGEBOX  //  LVGL Message Box Demo
   //  Create a Message Box Widget
@@ -224,8 +224,8 @@ static void create_widgets(void)
 
 int main(int argc, FAR char *argv[])
 {
-  lv_disp_drv_t disp_drv;
-  lv_disp_buf_t disp_buf;
+  lv_disp_drv_t *disp_drv = get_disp_drv();
+  lv_disp_buf_t *disp_buf = get_disp_buf();
 
 #if defined(CONFIG_INPUT_TOUCHSCREEN) || defined(CONFIG_INPUT_MOUSE)
 #ifndef CONFIG_EXAMPLES_LVGLTEST_CALIBRATE
@@ -271,18 +271,18 @@ int main(int argc, FAR char *argv[])
 
   /* Basic LVGL display driver initialization */
 
-  lv_disp_buf_init(&disp_buf, buffer1, buffer2, DISPLAY_BUFFER_SIZE);
-  lv_disp_drv_init(&disp_drv);
-  disp_drv.buffer = &disp_buf;
-  disp_drv.monitor_cb = monitor_cb;
+  lv_disp_buf_init(disp_buf, buffer1, buffer2, DISPLAY_BUFFER_SIZE);
+  lv_disp_drv_init(disp_drv);
+  disp_drv->buffer = disp_buf;
+  disp_drv->monitor_cb = monitor_cb;
 
   /* Display interface initialization */
 
-  if (lcddev_init(&disp_drv) != EXIT_SUCCESS)
+  if (lcddev_init(disp_drv) != EXIT_SUCCESS)
     {
       /* Failed to use lcd driver falling back to framebuffer */
 
-      if (fbdev_init(&disp_drv) != EXIT_SUCCESS)
+      if (fbdev_init(disp_drv) != EXIT_SUCCESS)
         {
           /* No possible drivers left, fail */
 
@@ -290,7 +290,7 @@ int main(int argc, FAR char *argv[])
         }
     }
 
-  lv_disp_drv_register(&disp_drv);
+  lv_disp_drv_register(disp_drv);
 
 #if defined(CONFIG_INPUT_TOUCHSCREEN) || defined(CONFIG_INPUT_MOUSE)
   /* Touchpad Initialization */

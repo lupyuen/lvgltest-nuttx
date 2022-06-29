@@ -38,6 +38,8 @@ extern "C"
  ****************************************************************************/
 
 int lcddev_init(lv_disp_drv_t *lv_drvr);
+lv_disp_drv_t *get_disp_drv(void);
+lv_disp_buf_t *get_disp_buf(void);
 
 #ifdef __cplusplus
 }

@@ -283,16 +283,13 @@ int main(int argc, FAR char *argv[])
   /* Touchpad Initialization */
 
   tp_init();
-  lv_indev_drv_t indev_drv;
-  lv_indev_drv_init(&indev_drv);
-  indev_drv.type = LV_INDEV_TYPE_POINTER;
+  lv_indev_drv_t *indev_drv = get_indev_drv();
 
-  /* This function will be called periodically (by the library) to get the
+  /* tp_read will be called periodically (by the library) to get the
    * mouse position and state.
    */
 
-  indev_drv.read_cb = tp_read;
-  lv_indev_drv_register(&indev_drv);
+  init_indev_drv(indev_drv, tp_read);
 #endif
 
   /* Create the widgets for display */

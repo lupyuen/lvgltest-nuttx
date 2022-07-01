@@ -126,4 +126,26 @@ bool tp_read(FAR struct _lv_indev_drv_t *indev_drv,
 void tp_set_cal_values(FAR lv_point_t *ul, FAR lv_point_t *ur,
                        FAR lv_point_t *lr, FAR lv_point_t *ll);
 
+/****************************************************************************
+ * Name: get_indev_drv
+ *
+ * Description:
+ *   Return the static instance of Input Driver, because Zig can't
+ *   allocate structs wth bitfields inside.
+ *
+ ****************************************************************************/
+
+lv_indev_drv_t *get_indev_drv(void);
+
+/****************************************************************************
+ * Name: init_indev_drv
+ *
+ * Description:
+ *   Initialise the Input Driver, because Zig can't access its fields.
+ *
+ ****************************************************************************/
+
+void init_indev_drv(lv_indev_drv_t *indev_drv,
+  bool (*read_cb)(struct _lv_indev_drv_t *, lv_indev_data_t *));
+
 #endif /* __APPS_EXAMPLES_LVGLTEST_TP_H */

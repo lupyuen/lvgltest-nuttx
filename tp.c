@@ -32,6 +32,7 @@
 #include <fcntl.h>
 #include <errno.h>
 #include <debug.h>
+#include <assert.h>
 
 #ifdef CONFIG_EXAMPLES_LVGLTEST_MOUSE
 #  include <nuttx/input/mouse.h>
@@ -276,4 +277,44 @@ void tp_set_cal_values(FAR lv_point_t *ul, FAR lv_point_t *ur,
   printf("offset x:%d, y:%d\n", x_offset, y_offset);
   printf("range x:%d, y:%d\n", x_range, y_range);
   printf("invert x/y:%d, x:%d, y:%d\n\n", xy_inv, x_inv, y_inv);
+}
+
+/****************************************************************************
+ * Name: get_indev_drv
+ *
+ * Description:
+ *   Return the static instance of Input Driver, because Zig can't
+ *   allocate structs wth bitfields inside.
+ *
+ ****************************************************************************/
+
+lv_indev_drv_t *get_indev_drv(void)
+{
+  static lv_indev_drv_t indev_drv;
+  return &indev_drv;
+}
+
+/****************************************************************************
+ * Name: init_indev_drv
+ *
+ * Description:
+ *   Initialise the Input Driver, because Zig can't access its fields.
+ *
+ ****************************************************************************/
+
+void init_indev_drv(lv_indev_drv_t *indev_drv,
+  bool (*read_cb)(struct _lv_indev_drv_t *, lv_indev_data_t *))
+{
+  assert(indev_drv != NULL);
+  assert(read_cb != NULL);
+
+  lv_indev_drv_init(indev_drv);
+  indev_drv->type = LV_INDEV_TYPE_POINTER;
+
+  /* This function will be called periodically (by the library) to get the
+   * mouse position and state.
+   */
+
+  indev_drv->read_cb = read_cb;
+  lv_indev_drv_register(indev_drv);
 }

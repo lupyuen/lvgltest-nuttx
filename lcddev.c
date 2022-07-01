@@ -41,6 +41,7 @@
 #include <fcntl.h>
 #include <errno.h>
 #include <debug.h>
+#include <assert.h>
 
 /****************************************************************************
  * Pre-processor Definitions
@@ -49,6 +50,11 @@
 #ifndef LCDDEV_PATH
 #  define LCDDEV_PATH  "/dev/lcd0"
 #endif
+
+/* Display Buffer Size */
+
+#define DISPLAY_BUFFER_SIZE (CONFIG_LV_HOR_RES * \
+                              CONFIG_EXAMPLES_LVGLTEST_BUFF_SIZE)
 
 /****************************************************************************
  * Private Types
@@ -73,6 +79,18 @@ static pthread_t lcd_write_thread;
 static sem_t flush_sem;
 static sem_t wait_sem;
 static struct lcddev_area_s lcd_area;
+#endif
+
+/* Display Buffer */
+
+static lv_color_t buffer1[DISPLAY_BUFFER_SIZE];
+
+/* Second Display Buffer for Double Buffering */
+
+#ifdef CONFIG_EXAMPLES_LVGLTEST_DOUBLE_BUFFERING
+static lv_color_t buffer2[DISPLAY_BUFFER_SIZE];
+#else
+# define buffer2 NULL
 #endif
 
 /****************************************************************************
@@ -342,4 +360,39 @@ lv_disp_buf_t *get_disp_buf(void)
 {
   static lv_disp_buf_t disp_buf;
   return &disp_buf;
+}
+
+/****************************************************************************
+ * Name: init_disp_drv
+ *
+ * Description:
+ *   Initialise the Display Driver, because Zig can't access its fields.
+ *
+ ****************************************************************************/
+
+void init_disp_drv(lv_disp_drv_t *disp_drv,
+  lv_disp_buf_t *disp_buf,
+  void (*monitor_cb)(struct _disp_drv_t *, uint32_t, uint32_t))
+{
+  assert(disp_drv != NULL);
+  assert(disp_buf != NULL);
+  assert(monitor_cb != NULL);
+
+  lv_disp_drv_init(disp_drv);
+  disp_drv->buffer = disp_buf;
+  disp_drv->monitor_cb = monitor_cb;
+}
+
+/****************************************************************************
+ * Name: init_disp_buf
+ *
+ * Description:
+ *   Initialise the Display Buffer, because Zig can't access the fields.
+ *
+ ****************************************************************************/
+
+void init_disp_buf(lv_disp_buf_t *disp_buf)
+{
+  assert(disp_buf != NULL);
+  lv_disp_buf_init(disp_buf, buffer1, buffer2, DISPLAY_BUFFER_SIZE);
 }

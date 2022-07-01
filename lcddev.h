@@ -40,6 +40,10 @@ extern "C"
 int lcddev_init(lv_disp_drv_t *lv_drvr);
 lv_disp_drv_t *get_disp_drv(void);
 lv_disp_buf_t *get_disp_buf(void);
+void init_disp_drv(lv_disp_drv_t *disp_drv,
+  lv_disp_buf_t *disp_buf,
+  void (*monitor_cb)(struct _disp_drv_t *, uint32_t, uint32_t));
+void init_disp_buf(lv_disp_buf_t *disp_buf);
 
 #ifdef __cplusplus
 }

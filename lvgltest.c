@@ -68,9 +68,6 @@
 #  define NEED_BOARDINIT 1
 #endif
 
-#define DISPLAY_BUFFER_SIZE (CONFIG_LV_HOR_RES * \
-                              CONFIG_EXAMPLES_LVGLTEST_BUFF_SIZE)
-
 /* LVGL Canvas Size */
 
 #define CANVAS_WIDTH   50
@@ -102,14 +99,6 @@ static void monitor_cb(lv_disp_drv_t * disp_drv, uint32_t time, uint32_t px)
 /****************************************************************************
  * Private Data
  ****************************************************************************/
-
-static lv_color_t buffer1[DISPLAY_BUFFER_SIZE];
-
-#ifdef CONFIG_EXAMPLES_LVGLTEST_DOUBLE_BUFFERING
-static lv_color_t buffer2[DISPLAY_BUFFER_SIZE];
-#else
-# define buffer2 NULL
-#endif
 
 /****************************************************************************
  * Private Functions
@@ -271,10 +260,8 @@ int main(int argc, FAR char *argv[])
 
   /* Basic LVGL display driver initialization */
 
-  lv_disp_buf_init(disp_buf, buffer1, buffer2, DISPLAY_BUFFER_SIZE);
-  lv_disp_drv_init(disp_drv);
-  disp_drv->buffer = disp_buf;
-  disp_drv->monitor_cb = monitor_cb;
+  init_disp_buf(disp_buf);
+  init_disp_drv(disp_drv, disp_buf, monitor_cb);
 
   /* Display interface initialization */
 

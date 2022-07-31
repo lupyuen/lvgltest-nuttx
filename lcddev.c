@@ -163,7 +163,10 @@ static void lcddev_async_flush(lv_disp_drv_t *disp_drv,
 static void lcddev_sync_flush(lv_disp_drv_t *disp_drv, const lv_area_t *area,
                               lv_color_t *color_p)
 {
-  int ret;
+  // TODO: Change LCDDEVIO_PUTRUN back to LCDDEVIO_PUTAREA so that it performs better with SPI DMA
+  // https://github.com/apache/incubator-nuttx/pull/6657#issuecomment-1200094716
+
+#ifdef NOTUSED
   struct lcddev_area_s lcd_area;
 
   lcd_area.row_start = area->y1;
@@ -175,14 +178,32 @@ static void lcddev_sync_flush(lv_disp_drv_t *disp_drv, const lv_area_t *area,
 
   ret = ioctl(state.fd, LCDDEVIO_PUTAREA,
               (unsigned long)((uintptr_t)&lcd_area));
+#endif  // NOTUSED
 
-  if (ret < 0)
+  lv_color_t *data = color_p;
+
+  for (lv_coord_t row = area->y1; row <= area->y2; row++)
     {
-      int errcode = errno;
+      int ret;
+      struct lcddev_run_s lcd_run;
 
-      gerr("ioctl(LCDDEVIO_PUTAREA) failed: %d\n", errcode);
-      close(state.fd);
-      return;
+      lcd_run.row     = row;
+      lcd_run.col     = area->x1;
+      lcd_run.data    = (uint8_t *)data;
+      lcd_run.npixels = area->x2 - area->x1 + 1;
+      data += lcd_run.npixels;
+
+      ret = ioctl(state.fd, LCDDEVIO_PUTRUN,
+                  (unsigned long)((uintptr_t)&lcd_run));
+
+      if (ret < 0)
+        {
+          int errcode = errno;
+
+          gerr("ioctl(LCDDEVIO_PUTRUN) failed: %d\n", errcode);
+          close(state.fd);
+          return;
+        }
     }
 
   /* Tell the flushing is ready */
